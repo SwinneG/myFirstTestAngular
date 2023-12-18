@@ -1,0 +1,38 @@
+<h1>{{showTitle}} - Episodes</h1>
+
+<app-nav-tabs></app-nav-tabs>
+
+<ul>
+    <li *ngFor="let season of seasons">
+        <a
+            routerLink="."
+            fragment="season{{ season.number }}"
+        >
+        S{{ season.number }}
+        </a>
+    </li>
+</ul>
+
+
+<div *ngFor="let season of seasons">
+    <h3 id="season{{ season.number }}">Saison {{ season.number }}</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>Number</td>
+                <td>Date</td>
+                <td>Name</td>
+                <td>Score</td>
+            </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor="let episode of season.episodes">
+                <td>{{ episode.number }}</td>
+                <td>{{ episode.airdate | date }}</td>
+                <td>{{ episode.name }}</td>
+                <td>{{ episode.rating.average }}</td>
+            </tr> 
+        </tbody>
+        
+    </table>
+</div>

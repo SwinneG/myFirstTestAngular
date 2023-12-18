@@ -1,0 +1,12 @@
+<h1>{{showTitle}} - Seasons</h1>
+
+<app-nav-tabs></app-nav-tabs>
+
+<div *ngFor="let season of seasonsList">
+    <img [src]="season.image.medium"/>
+
+    <h2>Season {{season.number}}</h2>
+    {{ season.network.name }}
+    <img src="https://static.tvmaze.com/intvendor/flags/{{season.network.country.code | lowercase}}.png"/>
+    {{season.premiereDate | date:'YYYY'}} - {{season.endDate | date:'YYYY'}}
+</div>

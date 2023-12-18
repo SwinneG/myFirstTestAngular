@@ -1,0 +1,62 @@
+<section class="show__maininfo">
+    <div class="row">
+        <div class="col-8 row">
+            <div class="col-6">
+                <img [src]="showDetail.image.medium" alt="{{ showDetail.name }}"/>
+            </div>
+            <div class="col-6">
+                <div [innerHTML]="showDetail.summary"></div>
+            </div>
+            
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <h5 class="card-title">Show info</h5>
+                <ul>
+                    <li>
+                        <strong>Network: </strong>
+                        <img src="https://static.tvmaze.com/intvendor/flags/{{ showDetail.network.country.code |lowercase }}.png"/> 
+                        <a [href]="showDetail.network.officialSite" target="_blank">{{ showDetail.network.name }}</a> 
+                        {{ showDetail.premiered }}
+                    </li>
+                    <li>
+                        <strong>Schedule: </strong>
+                        {{ showDetail.schedule.days[0] }} 
+                        {{ showDetail.schedule.time }}
+                        ({{showDetail.averageRuntime}} min)
+                    </li>
+                    <li>
+                        <strong>Status: </strong>
+                        {{ showDetail.status }}
+                    </li>
+                    <li>
+                        <strong>Show Type: </strong>
+                        {{ showDetail.type }}
+                    </li>
+                    <li>
+                        <strong>Genres: </strong> 
+                        <span *ngFor="let genre of showDetail.genres">
+                            {{genre}}
+                        </span>
+                    </li>
+                    <li>
+                        <strong>Episodes ordered: </strong>
+                        ?
+                    </li>
+                    <li>
+                        <strong>Created by: </strong>
+                        ?
+                    </li>
+                    <li>
+                        <strong>Official Site: </strong>
+                        <a href="{{ showDetail.officialSite }}">{{ showDetail.officialSite }}</a>
+                    </li>
+                    <li>
+                        <strong>Rating: </strong>
+                        {{ showDetail.rating.average }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

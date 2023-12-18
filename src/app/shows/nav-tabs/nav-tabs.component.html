@@ -1,0 +1,34 @@
+<ul>
+    <li>
+        <a
+            [routerLink]="['/shows/'+ id + '/' + titleForUrl]"
+            [queryParams]="{title: title}"
+        >
+            Main
+        </a>
+    </li>
+    <li>
+        <a
+            [routerLink]="['/shows/'+ id + '/' + titleForUrl + '/episodes']"
+            [queryParams]="{title: title}"
+        >
+            Episodes
+        </a>
+    </li>
+    <li>
+        <a
+            [routerLink]="['/shows/'+ id + '/' + titleForUrl + '/seasons']"
+            [queryParams]="{title: title}"
+        >
+            Seasons
+        </a>
+    </li>
+    <li>
+        <a
+            [routerLink]="['/shows/'+ id + '/' + titleForUrl + '/cast']"
+            [queryParams]="{title: title}"
+        >
+            Cast
+        </a>
+    </li>
+</ul>

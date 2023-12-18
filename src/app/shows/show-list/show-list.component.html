@@ -1,0 +1,45 @@
+<h1>Shows</h1>
+
+<form [formGroup]="searchForm">
+    <input formControlName="search"  placeholder="search show"/>
+</form>
+
+<!-- search -->
+<div *ngIf="searchForm.value.search; else elseBlock">
+    <div class="row">
+        <div class="col-3">
+            <a (click)="goToShowDetail(searchList)">
+                <div class="card">
+                    <img [src]="searchList.image.medium" alt="{{ searchList.name }}" class="card-img-top">
+                    <h5 class="card-title">
+                        {{ searchList.name }}
+                    </h5>
+                </div>
+            </a>
+        </div>
+    </div>
+</div> 
+
+<!-- listing by default -->
+<ng-template #elseBlock>
+    <div class="row">
+        <div *ngFor="let show of showsList" class="col-3">
+            <a (click)="goToShowDetail(show)">
+                <div class="card">
+                    <img [src]="show.image.medium" alt="{{ show.name }}" class="card-img-top">
+                    <h5 class="card-title">
+                        {{ show.name }}
+                    </h5>
+                </div>
+            </a>
+        </div>
+    </div>
+</ng-template>
+
+
+
+
+
+<!-- <ul class="pagination">
+    
+</ul> -->

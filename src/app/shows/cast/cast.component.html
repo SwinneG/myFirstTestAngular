@@ -1,0 +1,9 @@
+<h1>{{showTitle}} - Cast</h1>
+
+<app-nav-tabs></app-nav-tabs>
+
+<div *ngFor="let cast of showCast">
+    <img [src]="cast.person.image.medium"/>
+    <h2>{{ cast.person.name }}</h2>
+    voices {{cast.character.name}}
+</div>
