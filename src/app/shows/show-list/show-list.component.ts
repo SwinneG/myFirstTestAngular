@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShowsService } from '../shows.service';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-show-list',
@@ -18,6 +18,9 @@ export class ShowListComponent implements OnInit{
   paginatedShowsList:any = [];
   selectedPaginatedShowList:any = []
   compteur:number = 0;
+  ///////
+  showsListTest:any = []
+  error:any ='';
 
   constructor(
     private showsService: ShowsService,
@@ -44,6 +47,28 @@ export class ShowListComponent implements OnInit{
           this.searchList = response;
         })
     });
+
+    ////////
+    let nb = 1
+    let test = true;
+     while(test){
+       this.showsService.getShowsList(nb)
+      .subscribe((response) => {
+        this.showsListTest = response;
+        console.log(this.showsListTest);
+
+        //si l'objet est vide, tu sors du while
+        if(Object.keys(this.showsListTest).length === 0){
+          console.log('if')
+          test=false;
+          // return;
+          // break
+        }
+
+        console.log(test)
+        nb++;
+      })
+   }
 
   }
 
