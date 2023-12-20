@@ -2,7 +2,12 @@
 
 <ul class="pagination">
     <li *ngFor="let count of countPages; index as i">
-        <button (click)="getPaginatedDatas(i)">{{count}}</button>
+        <ng-container *ngIf="i==9; else elsePag">
+            <button (click)="getPaginatedDatas($event, i)" class="lastEl">{{count}}</button>
+        </ng-container>
+        <ng-template #elsePag>
+            <button (click)="getPaginatedDatas($event,i)">{{count}}</button>
+        </ng-template>
     </li>
 </ul>
 
