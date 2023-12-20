@@ -24,8 +24,9 @@ export class ShowsService {
     return this.http.get(commonUrl)
   }
 
-  public getShowsList() {
-    const url: string = `shows`;
+  public getShowsList(pageNumber:number) {
+
+    const url: string = `shows?page=${pageNumber}`;
     return this.getQuery(url).pipe(
       tap((response) => this.log(response)),
       catchError((error) => {

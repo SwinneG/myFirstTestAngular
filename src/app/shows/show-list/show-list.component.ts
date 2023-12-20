@@ -13,21 +13,47 @@ export class ShowListComponent implements OnInit{
   searchForm :any;
   showsList:any = [];
   searchList:any;
+  pageNumber: number = 1;
+  countPages:any = [];
+  paginatedShowsList:any = [];
+  selectedPaginatedShowList:any = []
 
   constructor(
     private showsService: ShowsService,
     private router : Router,
     private formBuilder: FormBuilder
-  ) {
-   
-    
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.showsService.getShowsList()
+    this.showsService.getShowsList(this.pageNumber)
       .subscribe(response => {
         this.showsList = response;
+
+        let showsLength:number = this.showsList.length
+        let dataSize:number = 25;
+        let compteur:number = 0;
+        let sliceStart:number = 0
+        let sliceEnd:number = 25
+
+        for(let i = 0 ; i <= showsLength; i++){
+          compteur++
+
+          showsLength = showsLength - dataSize
+          this.countPages.push(compteur)
+
+          this.paginatedShowsList[i] = this.showsList.slice(sliceStart,sliceEnd)
+          sliceStart = sliceStart + 25
+          sliceEnd = sliceEnd + 25
+
+          //au clic sur la page 10
+          // if(Math.sign(showsLength) == -1 ){
+          //   console.log('on relance le subscribe page 2,...');
+          // }
+          
+        }
+
     })
+    
 
     this.searchForm = this.formBuilder.group({
       search: '',
@@ -42,11 +68,9 @@ export class ShowListComponent implements OnInit{
        this.showsService.searchShow(this.searchForm.value.search)
         .subscribe(response => {
           this.searchList = response;
-          // console.log(this.searchList)
         })
     });
 
-    
   }
 
   goToShowDetail(show: any) {
@@ -54,6 +78,11 @@ export class ShowListComponent implements OnInit{
     this.router.navigate([this.router.url, show.id, title])
   }
 
-  
+  getPaginatedDatas(index:number){
+    this.searchForm.reset()
+    this.selectedPaginatedShowList = this.paginatedShowsList[index]
+    
+  }
+
 }
 
